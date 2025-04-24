@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwnirsV2 Unofficial Website 🗣️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'bounce-in': 'bounce-in 0.5s ease-out',
+                        'progress': 'progress 5s linear'
+                    },
+                    keyframes: {
+                        'bounce-in': {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '50%': { transform: 'scale(1.05)', opacity: '1' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        'progress': {
+                            '0%': { width: '0%' },
+                            '100%': { width: '100%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .backdrop {
+            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="fixed inset-0 flex items-center justify-center backdrop z-50 hidden" id="mainPopup">
+        <div class="animate-bounce-in bg-gray-800 rounded-lg shadow-xl p-6 max-w-md w-full border border-purple-500">
+            <h2 class="text-2xl font-bold text-purple-400 mb-4">Welcome to ownirsV2 ✨</h2>
+            <p class="mb-4">Discover more ownirsV2 sir 🥀</p>
+            <div class="h-1 bg-gray-700 rounded-full mb-4 overflow-hidden">
+                <div class="h-full bg-purple-500 animate-progress"></div>
+            </div>
+            <button onclick="document.getElementById('mainPopup').classList.add('hidden')" class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition">Continue</button>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16">
+        <header class="text-center mb-16">
+            <h1 class="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">ownirsV2</h1>
+            <p class="text-xl text-gray-300">Your premium content experience sir jas watch the video</p>
+        </header>
+
+        <section class="mb-24">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-bold mb-4">Featured Video</h2>
+                    <p class="text-gray-300 mb-6">Check out our latest ownirsV2</p>
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition transform hover:scale-105">
+                        Tik Da Midisin
+                    </button>
+                </div>
+                <div class="flex-1 relative">
+                    <video class="w-full rounded-xl shadow-2xl" controls>
+                        <source src="https://files.catbox.moe/wlq2r4.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-0 left-0 right-0 h-1 bg-gray-700 rounded-b-lg overflow-hidden">
+                        <div class="h-full bg-purple-500 animate-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition hover:-translate-y-1">
+                <div class="text-purple-400 text-3xl mb-4">✨</div>
+                <h3 class="text-xl font-bold mb-2">Check the OwnirsV2</h3>
+                <p class="text-gray-300">Checking lastest about ownirsV2 and more sir</p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition hover:-translate-y-1">
+                <div class="text-purple-400 text-3xl mb-4">🏥</div>
+                <h3 class="text-xl font-bold mb-2">Tik da midisin</h3>
+                <p class="text-gray-300">Enap Tik midisin naw bru</p>
+            </div>
+            <div class="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-purple-500/20 transition hover:-translate-y-1">
+                <div class="text-purple-400 text-3xl mb-4">🧑‍💻</div>
+                <h3 class="text-xl font-bold mb-2">Chatbot Community</h3>
+                <p class="text-gray-300">Visit our Group Page Sir</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="scrollPopup" class="fixed bottom-4 right-4 bg-gray-800 rounded-lg shadow-xl p-4 border border-purple-500 transform transition-all duration-300 translate-y-20 opacity-0 z-50 max-w-xs">
+        <div class="flex items-start">
+            <div class="flex-shrink-0 text-purple-400 text-xl mr-2">👋</div>
+            <div>
+                <h4 class="font-bold">Scroll Down</h4>
+                <p class="text-sm text-gray-300">Discover more amazing content below!</p>
+            </div>
+        </div>
+        <div class="h-1 bg-gray-700 rounded-full mt-2 overflow-hidden">
+            <div class="h-full bg-purple-500 w-0" id="scrollPopupProgress"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.getElementById('mainPopup').classList.remove('hidden');
+            }, 500);
+
+            let scrollPopup = document.getElementById('scrollPopup');
+            let scrollPopupProgress = document.getElementById('scrollPopupProgress');
+            let scrollPopupShown = false;
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300 && !scrollPopupShown) {
+                    scrollPopupShown = true;
+                    scrollPopup.classList.remove('translate-y-20', 'opacity-0');
+                    scrollPopup.classList.add('translate-y-0', 'opacity-100');
+                    
+                    setTimeout(() => {
+                        scrollPopupProgress.style.width = '100%';
+                    }, 50);
+                    
+                    setTimeout(() => {
+                        scrollPopup.classList.remove('translate-y-0', 'opacity-100');
+                        scrollPopup.classList.add('translate-y-20', 'opacity-0');
+                    }, 5000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
